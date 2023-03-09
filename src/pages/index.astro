@@ -1,0 +1,105 @@
+---
+enum Category {
+	JavascriptLibrary = 'JavascriptLibrary',
+	CSS = 'CSS',
+	React = 'React',
+	StaticSiteGenerator = 'StaticSiteGenerator'
+}
+
+interface Technology {
+	name: string;
+	url: string;
+	logo?: string;
+	category: Category;
+}
+
+const technologies: Record<string, Technology> = {
+	'astro': {
+		name: 'Astro',
+		url: 'https://astro.build/',
+		category: Category.StaticSiteGenerator
+	},
+	'gatsbyjs': {
+		name: 'GatsbyJS',
+		url: 'https://www.gatsbyjs.com/',
+		category: Category.StaticSiteGenerator
+	}
+};
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h2>hello</h2>
+		{Object.keys(technologies).map((name: string) => technologies[name]).map((technology: Technology) => (
+			<h1>{technology.name}</h1>
+			<h3>{technology.category}</h3>
+
+		))}
+	</body>
+</html>
+
+<!--
+create:
+mobile app using react native
+chrome extension
+vscode extension
+online game
+
+technologies:
+markdoc
+contentful
+wordpress headless cms
+partytown
+deno
+netlify
+
+next.js
+alpine
+lit
+preact
+
+nuxt
+mitosis
+web components
+electron
+react-native
+typescript
+vite
+vercel
+zagjs
+chakra
+astro
+tailwind
+remix
+gatsby
+graphql
+solid
+preact
+rollup
+parcel
+pnpm
+vitest
+jest
+three.js
+vue
+svelte
+emotion
+css modules
+accesibility
+postcss
+styled components
+singlespa
+esbuild
+webpack
+eslint
+prettier
+angular
+
+-->
