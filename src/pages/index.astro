@@ -1,52 +1,211 @@
 ---
+type KnowledgeLevel = "none" | "beginner" | "medium" | "good" | "expert";
+
 enum Category {
-	JavascriptLibrary = 'JavascriptLibrary',
-	CSS = 'CSS',
-	React = 'React',
-	StaticSiteGenerator = 'StaticSiteGenerator'
+  JavascriptLibrary = "JavascriptLibrary",
+  JSFramework = "JSFramework",
+  CSS = "CSS",
+  CSSFramework = "CSSFramework",
+  ModernCSS = "ModernCSS",
+  React = "React",
+  StaticSiteGenerator = "StaticSiteGenerator",
+  PackageManager = "PackageManager",
 }
 
 interface Technology {
-	name: string;
-	url: string;
-	logo?: string;
-	category: Category;
+  name: string;
+  url: string;
+  logo?: string;
+  category: Category;
+  knowledgeLevel: KnowledgeLevel;
+  implementedProject: boolean;
+}
+
+interface Project {
+  name: string;
+  description: string;
+  image: string;
+  technologies: Technology[];
 }
 
 const technologies: Record<string, Technology> = {
-	'astro': {
-		name: 'Astro',
-		url: 'https://astro.build/',
-		category: Category.StaticSiteGenerator
-	},
-	'gatsbyjs': {
-		name: 'GatsbyJS',
-		url: 'https://www.gatsbyjs.com/',
-		category: Category.StaticSiteGenerator
-	}
+  astro: {
+    name: "Astro",
+    url: "https://astro.build/",
+    category: Category.StaticSiteGenerator,
+    knowledgeLevel: "none",
+    implementedProject: true,
+  },
+  gatsbyjs: {
+    name: "GatsbyJS",
+    url: "https://www.gatsbyjs.com/",
+    category: Category.StaticSiteGenerator,
+    knowledgeLevel: "none",
+    implementedProject: false,
+  },
+  tailwind: {
+    name: "Tailwind CSS",
+    url: "https://tailwindcss.com/",
+    category: Category.CSSFramework,
+    knowledgeLevel: "none",
+    implementedProject: false,
+  },
+  chakra: {
+    name: "Chakra UI",
+    url: "",
+    category: Category.CSSFramework,
+    knowledgeLevel: "none",
+    implementedProject: false,
+  },
+  react: {
+    name: "React",
+    url: "",
+    category: Category.JSFramework,
+    knowledgeLevel: "none",
+    implementedProject: false,
+  },
+  angular: {
+    name: "Angular",
+    url: "",
+    category: Category.JSFramework,
+    knowledgeLevel: "none",
+    implementedProject: false,
+  },
+  vue: {
+    name: "Vue.js",
+    url: "",
+    category: Category.JSFramework,
+    knowledgeLevel: "none",
+    implementedProject: false,
+  },
+  CSSModules: {
+    name: "CSS Modules",
+    url: "",
+    category: Category.ModernCSS,
+    knowledgeLevel: "none",
+    implementedProject: false,
+  },
+  styledComponents: {
+    name: "Styled Components",
+    url: "",
+    category: Category.ModernCSS,
+    knowledgeLevel: "none",
+    implementedProject: false,
+  },
+  threeJS: {
+    name: "Three JS",
+    url: "",
+    category: Category.JavascriptLibrary,
+    knowledgeLevel: "none",
+    implementedProject: false,
+  },
+  pnpm: {
+    name: "pnpm",
+    url: "",
+    category: Category.PackageManager,
+    knowledgeLevel: "beginner",
+    implementedProject: true,
+  },
 };
+
+const projects: Project[] = [
+  {
+    name: "Portfolio",
+    image:
+      "https://img.freepik.com/free-vector/flat-design-colored-portfolio-template_23-2149215470.jpg",
+    description: "This website",
+    technologies: [
+      technologies.astro,
+      technologies.tailwind,
+      technologies.pnpm,
+      technologies.pnpm,
+      technologies.pnpm,
+      technologies.pnpm,
+    ],
+  },
+  {
+    name: "Taycan",
+    image:
+      "https://hips.hearstapps.com/hmg-prod/images/2022-porsche-taycan-sport-turismo-gts-18-16-1658169834.jpeg",
+    description: "3d model viewer",
+    technologies: [technologies.vue, technologies.threeJS],
+  },
+];
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h2>hello</h2>
-		{Object.keys(technologies).map((name: string) => technologies[name]).map((technology: Technology) => (
-			<h1>{technology.name}</h1>
-			<h3>{technology.category}</h3>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Stefan Moraru</title>
+  </head>
+  <body class="bg-slate-800">
+    <div class="container mx-auto px-4">
+      <div class="mt-8">
+        <h3 class="text-white text-3xl font-medium tracking-tight">
+          Hello, I'm Stefan Moraru
+        </h3>
+        <h6 class="text-white text-lg font-medium mt-2">
+          and this is my <span class="text-orange-500">portfolio.</span>
+        </h6>
+      </div>
 
-		))}
-	</body>
+      <div>
+        {
+          projects.map((project: Project) => (
+            <div class="flex h-auto min-h-36 rounded-lg overflow-hidden mt-8 mb-8">
+              <div
+                class={`bg-cover bg-center w-full h-auto`}
+                style={{
+                  backgroundImage: `url('${project.image}')`,
+                }}
+              />
+              <div class="bg-white h-full w-6/12 p-6">
+                <h3 class="text-slate-500 text-xl font-medium tracking-tight">
+                  {project.name}
+                </h3>
+                <h6 class="text-slate-500 text-md font-medium tracking-tight">
+                  {project.description}
+                </h6>
+                {project.technologies.map((technology: Technology) => (
+                  <p class="text-sm font-bold tracking-tighter text-slant-500">
+                    - {technology.name}
+                  </p>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div>
+        <h3 class="text-white text-xl font-medium tracking-tight">
+          List of technologies:
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-4">
+        {
+          Object.keys(technologies)
+            .map((name: string) => technologies[name])
+            .map((technology: Technology) => (
+              <div class="bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg px-4 py-3 m-2 ring-1 rin-slate-900/5 shadow-xl">
+                <p class="text-sm font-bold tracking-tighter text-white">
+                  {technology.name}
+                </p>
+              </div>
+            ))
+        }
+      </div>
+    </div>
+  </body>
 </html>
 
 <!--
 create:
+portfolio website
 mobile app using react native
 chrome extension
 vscode extension
@@ -60,11 +219,18 @@ partytown
 deno
 netlify
 
+goals?
+
+to do:
+dynamic svg
+3d model
+
 next.js
 alpine
 lit
 preact
-
+performance
+SEO
 nuxt
 mitosis
 web components
@@ -92,6 +258,7 @@ vue
 svelte
 emotion
 css modules
+css grids
 accesibility
 postcss
 styled components
