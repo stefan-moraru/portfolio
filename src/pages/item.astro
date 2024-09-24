@@ -1,0 +1,41 @@
+---
+import type { Technology } from "./index.astro";
+const { title, description, url, technologies, type } = Astro.props;
+---
+
+<div class="bg-gray-200 p-4 rounded-xl break-words">
+  <div class="flex items-center gap-2">
+    <h3 class="font-bold">{title}</h3>
+
+    {
+      type && (
+        <div class="flex items-center mt-[2px]">
+          {type === "opensource" ? (
+            <div class="flex items-center bg-green-100 p-[0.1rem] px-2 rounded-lg text-[0.6rem] font-medium cursor-default">
+              open source
+            </div>
+          ) : (
+            <div class="flex items-center bg-orange-100 p-[0.1rem] px-2 rounded-lg text-[0.6rem] font-medium cursor-default">
+              project for clients
+            </div>
+          )}
+        </div>
+      )
+    }
+  </div>
+  <p>{description}</p>
+  <a class="text-blue-600" href={url}>{url}</a>
+
+  {
+    technologies?.length > 0 && (
+      <div class="flex gap-2 mt-2 flex-wrap">
+        {technologies.map((technology: Technology) => (
+          <div class="flex items-center gap-1 bg-blue-300 p-1 px-2 rounded-lg text-xs font-medium cursor-default">
+            {technology.icon && <i class={technology.icon} />}
+            {technology.name}
+          </div>
+        ))}
+      </div>
+    )
+  }
+</div>

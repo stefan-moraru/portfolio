@@ -1,0 +1,122 @@
+---
+import Item from "./item.astro";
+
+import "devicon/devicon.min.css";
+
+export type Technology = {
+  name: string;
+  icon?: string;
+};
+
+export type Project = {
+  title: string;
+  type: "opensource" | "client";
+  description: string;
+  url: string;
+  technologies: Technology[];
+};
+
+const projects: Project[] = [
+  {
+    title: "micropods",
+    type: "opensource",
+    description:
+      "Complete example of module federation with rspack, react, tailwind, shacdn",
+    url: "https://github.com/stefan-moraru/micropods",
+    technologies: [
+      { name: "rspack" },
+      { name: "react", icon: "devicon-react-original" },
+      { name: "tailwind", icon: "devicon-tailwindcss-original" },
+      { name: "shacdn" },
+      { name: "react-query" },
+      { name: "react-router-dom" },
+      { name: "react-i18-next" },
+      { name: "pnpm", icon: "devicon-pnpm-plain" },
+    ],
+  },
+  {
+    title: "dotfiles",
+    type: "opensource",
+    description: "Sensible and easily replicable setup for a macbook.",
+    url: "https://github.com/stefan-moraru/dotfiles",
+    technologies: [
+      { name: "bash", icon: "devicon-bash-plain" },
+      { name: "zsh", icon: "devicon-ohmyzsh-plain" },
+      { name: "vim", icon: "devicon-vim-plain" },
+    ],
+  },
+  {
+    title: "pseudocod",
+    type: "opensource",
+    description: "Pseudocode IDE for highschools",
+    url: "https://pseudocod.ro",
+    technologies: [
+      { name: "javascript", icon: "devicon-javascript-plain" },
+      { name: "css", icon: "devicon-css3-plain" },
+      { name: "html", icon: "devicon-html5-plain" },
+    ],
+  },
+  {
+    title: "museve",
+    type: "client",
+    description: "Corporate website",
+    url: "https://museve.ro",
+    technologies: [
+      { name: "astro", icon: "devicon-astro-plain" },
+      { name: "tailwind", icon: "devicon-tailwindcss-original" },
+      { name: "tally" },
+    ],
+  },
+];
+
+const articles = [
+  {
+    title: "Microfrontends - Complete module federation example",
+    description:
+      "A complete example of module federation with rspack and an UI library, translations, pub/sub and many more.",
+    url: "https://dev.to/stefanmoraru/complete-module-federation-example-with-rspack-3pn3",
+  },
+];
+
+const social = [
+  { url: "https://github.com/stefan-moraru" },
+  { url: "https://dev.to/stefanmoraru" },
+  { title: "stefan@stefanmoraru.ro", url: "mailto:stefan@stefanmoraru.ro" },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Stefan Moraru</title>
+  </head>
+
+  <body class="container px-4 pb-8 sm:px-0 mx-auto bg-slate-800 mt-4">
+    <h1 class="text-white text-lg">Stefan Moraru</h1>
+
+    <div class="grid grid-cols-1 gap-4 mt-2">
+      <h2 class="text-white text-md font-medium">👷 Projects</h2>
+      {projects.map((project) => <Item {...project} />)}
+
+      <h2 class="text-white text-md font-medium">📝 Articles</h2>
+      {articles.map((article) => <Item {...article} />)}
+
+      <h2 class="text-white text-md font-medium">🌍 Social</h2>
+      <div class="bg-gray-200 p-4 rounded-xl">
+        {
+          social.map((platform, index) => (
+            <a
+              class={`block text-blue-600 ${index === social.length - 1 ? "" : "mb-2"}`}
+              href={platform.url}
+            >
+              {platform.title || platform.url}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </body>
+</html>
