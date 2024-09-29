@@ -1,6 +1,9 @@
 ---
+import { TECHNOLOGY_MAP } from "./index.astro";
 import type { Technology } from "./index.astro";
-const { title, description, url, technologies, type } = Astro.props;
+
+const { title, description, url, repository, technologies, type, tags } =
+  Astro.props;
 ---
 
 <div class="bg-gray-200 p-4 rounded-xl break-words">
@@ -22,19 +25,58 @@ const { title, description, url, technologies, type } = Astro.props;
         </div>
       )
     }
+
+    {
+      tags && (
+        <div class="flex items-center mt-[2px]">
+          {tags
+            .map((tag: string) => TECHNOLOGY_MAP[tag])
+            .map((tag: Technology) => (
+              <div class="flex items-center gap-1 bg-purple-200 p-[0.1rem] px-2 rounded-lg text-[0.6rem] font-medium cursor-default">
+                {tag.icon && <i class={tag.icon} />}
+                {tag.name}
+              </div>
+            ))}
+        </div>
+      )
+    }
   </div>
+
   <p>{description}</p>
-  <a class="text-blue-600" href={url}>{url}</a>
+
+  {
+    url && !repository && (
+      <a class="text-blue-600" href={url}>
+        {url}
+      </a>
+    )
+  }
+  {
+    url && repository && (
+      <>
+        <a class="text-blue-600" href={url}>
+          {url}
+        </a>
+        <div>
+          <a class="text-blue-600" href={repository}>
+            {repository}
+          </a>
+        </div>
+      </>
+    )
+  }
 
   {
     technologies?.length > 0 && (
       <div class="flex gap-2 mt-2 flex-wrap">
-        {technologies.map((technology: Technology) => (
-          <div class="flex items-center gap-1 bg-blue-300 p-1 px-2 rounded-lg text-xs font-medium cursor-default">
-            {technology.icon && <i class={technology.icon} />}
-            {technology.name}
-          </div>
-        ))}
+        {technologies
+          .map((technology: string) => TECHNOLOGY_MAP[technology])
+          .map((technology: Technology) => (
+            <div class="flex items-center gap-1 bg-blue-300 p-1 px-2 rounded-lg text-xs font-medium cursor-default">
+              {technology.icon && <i class={technology.icon} />}
+              {technology.name}
+            </div>
+          ))}
       </div>
     )
   }

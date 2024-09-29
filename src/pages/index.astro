@@ -13,7 +13,78 @@ export type Project = {
   type: "opensource" | "client";
   description: string;
   url: string;
-  technologies: Technology[];
+  technologies: string[];
+  tags?: string[];
+  repository?: string;
+};
+
+export const TECHNOLOGY_MAP: Record<string, Technology> = {
+  npm: {
+    name: "npm",
+    icon: "devicon-npm-original-wordmark",
+  },
+  rspack: {
+    name: "rspack",
+  },
+  react: {
+    name: "react",
+    icon: "devicon-react-original",
+  },
+  tailwind: {
+    name: "tailwind",
+    icon: "devicon-tailwindcss-original",
+  },
+  shacdn: {
+    name: "shacdn",
+  },
+  "react-query": {
+    name: "react-query",
+  },
+  "react-router-dom": {
+    name: "react-router-dom",
+  },
+  "react-i18-next": {
+    name: "react-i18-next",
+  },
+  pnpm: {
+    name: "pnpm",
+    icon: "devicon-pnpm-plain",
+  },
+  bash: {
+    name: "bash",
+    icon: "devicon-bash-plain",
+  },
+  zsh: {
+    name: "zsh",
+    icon: "devicon-ohmyzsh-plain",
+  },
+  vim: {
+    name: "vim",
+    icon: "devicon-vim-plain",
+  },
+  javascript: {
+    name: "javascript",
+    icon: "devicon-javascript-plain",
+  },
+  css: {
+    name: "css",
+    icon: "devicon-css3-plain",
+  },
+  html: {
+    name: "html",
+    icon: "devicon-html5-plain",
+  },
+  astro: {
+    name: "astro",
+    icon: "devicon-astro-plain",
+  },
+  tally: {
+    name: "tally",
+  },
+  vite: {
+    name: "vite",
+    icon: "devicon-vitejs-plain",
+  },
 };
 
 const projects: Project[] = [
@@ -24,48 +95,46 @@ const projects: Project[] = [
       "Complete example of module federation with rspack, react, tailwind, shacdn",
     url: "https://github.com/stefan-moraru/micropods",
     technologies: [
-      { name: "rspack" },
-      { name: "react", icon: "devicon-react-original" },
-      { name: "tailwind", icon: "devicon-tailwindcss-original" },
-      { name: "shacdn" },
-      { name: "react-query" },
-      { name: "react-router-dom" },
-      { name: "react-i18-next" },
-      { name: "pnpm", icon: "devicon-pnpm-plain" },
+      "rspack",
+      "react",
+      "tailwind",
+      "shacdn",
+      "react-query",
+      "react-router-dom",
+      "react-i18-next",
+      "pnpm",
     ],
+  },
+  {
+    title: "react-portal-bridge",
+    type: "opensource",
+    tags: ["npm"],
+    description:
+      "Share React components between microfrontends by using dynamic portals",
+    url: "https://npmjs.com/package/react-portal-bridge",
+    repository: "https://github.com/stefan-moraru/react-portal-bridge",
+    technologies: ["react", "vite", "pnpm"],
   },
   {
     title: "dotfiles",
     type: "opensource",
-    description: "Sensible and easily replicable setup for a macbook.",
+    description: "Sensible and easily replicable setup for a macbook",
     url: "https://github.com/stefan-moraru/dotfiles",
-    technologies: [
-      { name: "bash", icon: "devicon-bash-plain" },
-      { name: "zsh", icon: "devicon-ohmyzsh-plain" },
-      { name: "vim", icon: "devicon-vim-plain" },
-    ],
+    technologies: ["bash", "zsh", "vim"],
   },
   {
     title: "pseudocod",
     type: "opensource",
     description: "Pseudocode IDE for highschools",
     url: "https://pseudocod.ro",
-    technologies: [
-      { name: "javascript", icon: "devicon-javascript-plain" },
-      { name: "css", icon: "devicon-css3-plain" },
-      { name: "html", icon: "devicon-html5-plain" },
-    ],
+    technologies: ["javascript", "css", "html"],
   },
   {
     title: "museve",
     type: "client",
-    description: "Corporate website",
+    description: "Corporate website for a music school",
     url: "https://museve.ro",
-    technologies: [
-      { name: "astro", icon: "devicon-astro-plain" },
-      { name: "tailwind", icon: "devicon-tailwindcss-original" },
-      { name: "tally" },
-    ],
+    technologies: ["astro", "tailwind", "tally"],
   },
 ];
 
@@ -76,12 +145,19 @@ const articles = [
       "A complete example of module federation with rspack and an UI library, translations, pub/sub and many more.",
     url: "https://dev.to/stefanmoraru/complete-module-federation-example-with-rspack-3pn3",
   },
+  {
+    title: "single-spa: 404 route without an additional microfrontend",
+    description:
+      "Exploring a way to simplify your single-spa microfrontend architecture by removing the dedicated error page microfrontend",
+    url: "https://dev.to/stefanmoraru/single-spa-404-route-without-an-additional-microfrontend-531j",
+  },
 ];
 
 const social = [
   { url: "https://github.com/stefan-moraru" },
   { url: "https://dev.to/stefanmoraru" },
   { title: "stefan@stefanmoraru.ro", url: "mailto:stefan@stefanmoraru.ro" },
+  { url: "https://www.npmjs.com/~stefanmoraru" },
 ];
 ---
 
@@ -120,3 +196,86 @@ const social = [
     </div>
   </body>
 </html>
+
+<!--
+
+Portfolio goals
+- Retro version
+
+Project goals
+- Dynamic 3d website (threejs)
+- Project with next.js
+- Mobile application using React Native
+- Chrome extension
+- VSCode extension
+- VIM plugin
+
+---
+
+Created
+
+create:
+portfolio website
+mobile app using react native
+chrome extension
+vscode extension
+online game
+
+technologies:
+markdoc
+contentful
+wordpress headless cms
+partytown
+deno
+netlify
+
+goals?
+
+to do:
+dynamic svg
+3d model
+
+next.js
+alpine
+lit
+preact
+performance
+SEO
+nuxt
+mitosis
+web components
+electron
+react-native
+typescript
+vite
+vercel
+zagjs
+chakra
+astro
+tailwind
+remix
+gatsby
+graphql
+solid
+preact
+rollup
+parcel
+pnpm
+vitest
+jest
+three.js
+vue
+svelte
+emotion
+css modules
+css grids
+accesibility
+postcss
+styled components
+singlespa
+esbuild
+webpack
+eslint
+prettier
+angular
+-->
